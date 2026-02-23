@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpenClaw Master Course | Build Your Personal AI Agent</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #0d0d0f;
+            --surface: #141417;
+            --surface2: #1c1c21;
+            --border: #2a2a32;
+            --accent: #e8ff5a;
+            --accent2: #5affd9;
+            --accent3: #ff7b5a;
+            --text: #e8e8ec;
+            --muted: #7a7a8a;
+            --mono: 'DM Mono', monospace;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; font-size: 16px; line-height: 1.7; }
+        
+        /* NAV */
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(13,13,15,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; gap: 0; overflow-x: auto; scrollbar-width: none; }
+        nav::-webkit-scrollbar { display: none; }
+        nav .logo { font-weight: 800; font-size: 0.85rem; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; white-space: nowrap; padding: 1rem 1.5rem 1rem 0; border-right: 1px solid var(--border); margin-right: 1rem; }
+        nav a { color: var(--muted); text-decoration: none; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 1rem 0.85rem; white-space: nowrap; transition: color 0.2s; }
+        nav a:hover { color: var(--accent); }
+        
+        /* HERO */
+        .hero { padding: 8rem 2rem 6rem; max-width: 860px; margin: 0 auto; position: relative; }
+        .hero-tag { display: inline-block; background: var(--accent); color: #0d0d0f; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.75rem; margin-bottom: 2rem; }
+        .hero h1 { font-family: 'Instrument Serif', serif; font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.1; margin-bottom: 1.5rem; color: #fff; }
+        .hero h1 em { font-style: italic; color: var(--accent); }
+        .hero .subtitle { font-size: 1.15rem; color: var(--muted); max-width: 560px; margin-bottom: 2.5rem; line-height: 1.6; }
+        .hero .byline { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+        .hero .byline span { color: var(--accent2); }
+        
+        /* WHAT IS BOX */
+        .what-is-box { background: linear-gradient(135deg, #1a1a24, #12121a); border: 1px solid var(--accent); border-left: 4px solid var(--accent); padding: 2rem 2.5rem; margin: 0 auto 4rem; max-width: 860px; }
+        .what-is-box h3 { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; font-weight: 700; }
+        .what-is-box p { font-size: 1.05rem; color: var(--text); line-height: 1.7; }
+        .what-is-box strong { color: var(--accent2); }
+        
+        /* SECTIONS */
+        section { max-width: 860px; margin: 0 auto; padding: 4rem 2rem; border-top: 1px solid var(--border); }
+        section:first-of-type { border-top: none; }
+        
+        /* VIDEO CONTAINER */
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid var(--border); margin: 2rem 0; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        
+        /* MODULES */
+        .module { margin-bottom: 3rem; }
+        .module-number { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .module h2 { font-family: 'Instrument Serif', serif; font-size: 1.75rem; color: #fff; margin-bottom: 1rem; font-weight: 400; }
+        .module p { color: var(--muted); margin-bottom: 1.5rem; }
+        
+        /* CTA */
+        .cta { text-align: center; padding: 6rem 2rem; }
+        .cta-price { font-family: 'Instrument Serif', serif; font-size: 4rem; color: #fff; margin-bottom: 0.5rem; }
+        .cta-price span { font-size: 1rem; color: var(--muted); }
+        .cta .btn { display: inline-block; background: var(--accent); color: #0d0d0f; padding: 1rem 2.5rem; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; margin-top: 2rem; transition: transform 0.2s; }
+        .cta .btn:hover { transform: scale(1.03); }
+        
+        /* FOOTER */
+        footer { border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; color: var(--muted); font-size: 0.8rem; }
+        footer a { color: var(--accent2); }
+        
+        @media (max-width: 600px) {
+            .hero { padding: 4rem 1.5rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            section { padding: 2rem 1.5rem; }
+            .cta-price { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">OpenClaw</div>
+        <a href="#course">Course</a>
+        <a href="#modules">Modules</a>
+        <a href="#pricing">Pricing</a>
+    </nav>
+    
+    <div class="hero">
+        <span class="hero-tag">30-Day Mastery Course</span>
+        <h1>Build Your Personal<br><em>AI Agent</em> in 30 Days</h1>
+        <p class="subtitle">No coding required. Just step-by-step videos, copy-paste templates, and a private community to help you ship real automation—fast.</p>
+        <p class="byline">by <span>Tim Pittman</span> · Sr. Director of Customer Success</p>
+    </div>
+    
+    <div class="what-is-box">
+        <h3>What You'll Build</h3>
+        <p>By the end of this course, you'll have <strong>5 production-ready AI agents</strong> working for you: a CS health score agent, renewal reminder agent, churn prevention agent, lead enrichment agent, and a personal assistant agent. All without writing a single line of code.</p>
+    </div>
+    
+    <section id="modules">
+        <!-- MODULE 1 -->
+        <div class="module">
+            <div class="module-number">Module 01</div>
+            <h2>Foundation & Setup</h2>
+            <p>Get OpenClaw running in under 10 minutes. Configure your first agent, connect your first channel (Telegram, Discord, or WhatsApp), and understand the core concepts that make everything else click.</p>
+            <div class="video-container">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/fii5RCHs3eQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <!-- MODULE 2 -->
+        <div class="module">
+            <div class="module-number">Module 02</div>
+            <h2>CS Automation Agents</h2>
+            <p>Build three production agents: a health score calculator that pulls data from your CRM, a renewal reminder system that nags you (nicely) at the right time, and a churn prevention agent that flags at-risk accounts before it's too late.</p>
+            <div class="video-container">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/EKJjSDBkGUo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <!-- MODULE 3 -->
+        <div class="module">
+            <div class="module-number">Module 03</div>
+            <h2>Revenue Workflow Agents</h2>
+            <p>Create agents that work while you sleep: a pipeline review agent that summarizes open deals every morning, a lead enrichment agent that pulls company data from the web, and a competitive intel agent that monitors your competitors.</p>
+            <div class="video-container">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/JRIp1w-q4bs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <!-- MODULE 4 -->
+        <div class="module">
+            <div class="module-number">Module 04</div>
+            <h2>Advanced Patterns & Your Personal AI</h2>
+            <p>Master multi-agent orchestration, build custom skills, and create your personal AI assistant that handles flight tracking, meeting prep, and financial monitoring. This is the power tier.</p>
+            <div class="video-container">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/fii5RCHs3eQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    
+    <section id="pricing" class="cta">
+        <p style="color: var(--accent); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem;">Launch Price · First 50 Students</p>
+        <div class="cta-price">$19 <span>one-time</span></div>
+        <p style="color: var(--muted); max-width: 400px; margin: 0 auto;">4 video modules · 5 agent templates · Notion playbook · Private community · Lifetime updates</p>
+        <a href="https://gum.co/openclaw-course" class="btn">Pre-order Now</a>
+    </section>
+    
+    <footer>
+        <p>Questions? <a href="https://x.com">@tim</a> on X</p>
+        <p style="margin-top: 0.5rem;">© 2026 Tim Pittman. All rights reserved.</p>
+    </footer>
+</body>
+</html>
